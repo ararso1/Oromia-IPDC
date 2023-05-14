@@ -1,0 +1,270 @@
+            
+            {% include 'ipdc/investor_dashboard/header.html' %}
+            {% load static %}
+                
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Company</strong>
+                                        <small> Form</small>
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <div class="form-group">
+                                            <label for="company" class=" form-control-label">Company</label>
+                                            <input type="text" id="company" placeholder="Enter your company name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="vat" class=" form-control-label">VAT</label>
+                                            <input type="text" id="vat" placeholder="DE1234567890" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="street" class=" form-control-label">Street</label>
+                                            <input type="text" id="street" placeholder="Enter street name" class="form-control">
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="city" class=" form-control-label">City</label>
+                                                    <input type="text" id="city" placeholder="Enter your city" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="postal-code" class=" form-control-label">Postal Code</label>
+                                                    <input type="text" id="postal-code" placeholder="Postal Code" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="country" class=" form-control-label">Country</label>
+                                            <input type="text" id="country" placeholder="Country name" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">Credit Card</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Pay Invoice</h3>
+                                        </div>
+                                        <hr>
+                                        <form action="" method="post" novalidate="novalidate">
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Payment amount</label>
+                                                <input id="cc-pament" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="100.00">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Name on card</label>
+                                                <input id="cc-name" name="cc-name" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
+                                                    autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Card number</label>
+                                                <input id="cc-number" name="cc-number" type="tel" class="form-control cc-number identified visa" value="" data-val="true"
+                                                    data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number"
+                                                    autocomplete="cc-number">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Expiration</label>
+                                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration"
+                                                            data-val-cc-exp="Please enter a valid month and year" placeholder="MM / YY"
+                                                            autocomplete="cc-exp">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="x_card_code" class="control-label mb-1">Security code</label>
+                                                    <div class="input-group">
+                                                        <input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code"
+                                                            data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                    <span id="payment-button-amount">Pay $100.00</span>
+                                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'ipdc/investor_dashboard/footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <form method="POST">
+                {{landform.errors}}
+                {% csrf_token %}
+                
+              <div class="form-group">
+                      <label>Form of Investement</label>
+                      <select class="form-control" name='form_of_investment' required>
+                        <option>soleprorietor</option>
+                        <option>PLC</option>
+                        <option>joint-venture</option>
+                      </select>
+                    </div>
+              <div class="form-group">
+                      <label>Request Type</label>
+                      <select class="form-control" name='requested_type' required>
+                        <option>License</option>
+                        <option>Land Request</option>
+                        <option>Expansion</option>
+                      </select>
+                    </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1">Requested Land (In Hec.Or M2)</label>
+                  <input type="number" name="requested_land" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="total" required>
+                </div>
+              <div class="form-group">
+                      <label>sector</label>
+                      <select class="form-control" name='sector' required>
+                        <option>Manufacturing</option>
+                        <option>Agriculture</option>
+                        <option>Service</option>
+                      </select>
+                    </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1"> Project Name</label>
+                  <input type="number" name="project_name" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="project name" required>
+                </div>
+                <div class="form-group">
+                  <label>Project description</label>
+                   <textarea  name='project_description' class="form-control" rows="6" placeholder="project description"></textarea>
+                </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1">capital</label>
+                  <input type="number" name="capital" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1">owner equity</label>
+                  <input type="number" name="owner_equity" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                </div>
+              
+              
+              <div class="form-group">
+                  <label for="exampleInputPassword1">bank loan</label>
+                  <input type="number" name="bank_loan" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                </div>  
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Temporary Job Create </label>
+                  <input type="text" name="temporay_job" class="form-control" id="exampleInputPassword1" placeholder="" required>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Permanent Job Create </label>
+                  <input type="text" name="Permanent_job" class="form-control" id="exampleInputPassword1" placeholder="" required>
+              </div>
+              
+          
+                <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              <!-- /.card-body -->
+             
+              <!-- /.card-footer -->
+            </form>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {% for message in messages %}
+                                {% if message.written_by.username == request.user.username  %}
+                                <div class="chat-message-right pb-4">
+                                    <div>
+                                        <div class="text-muted small text-nowrap mt-2">{{message.date}}</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                        <div class="font-weight-bold mb-1"></div>
+                                       {{message.msg}}
+                                    </div>
+                                </div>
+                                {%else%}
+                                <div class="chat-message-left pb-4">
+                                    <div>
+                                        <div class="text-muted small text-nowrap mt-2">2:34 am</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                        
+                                     {{message.msg}}                                   
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {%endfor%}
+
+
+
+
+
+
+
+
+
+
+                                <script>
+                                    let getNote = async () => {
+                                        let response = await fetch('http://127.0.0.1:8000/api/getmessages/')
+                                        let data = await response.json()
+                                        for (var da in data){
+                                            console.log("hhh",data[da].id);
+                                        }
+                                    }
+
+                                    let i=0;
+                                    setInterval(function(){
+                                        console.log("abduse",i);
+                                        i++;
+                                        getNote();
+                                    }, 1000);                                       
