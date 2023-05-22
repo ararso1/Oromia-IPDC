@@ -25,5 +25,7 @@ urlpatterns = [
     path('all_investor', views.all_investor, name="all_investor"),
     path('view_investor_profile', views.view_investor_profile, name="view_investor_profile"),
     path('proposal', views.proposal, name="proposal"),
+    path('pdfviewer', views.pdfviewer, name="pdfviewer"),
+    
 ]
 

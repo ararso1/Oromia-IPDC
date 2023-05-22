@@ -44,8 +44,6 @@ def investor_profile(request):
 def live_camera(request):
     return render(request, 'ipdc/Investor_dashboard/live_camera.html')
 
-
-
 def license_request(request):
     return render(request, 'ipdc/Investor_dashboard/license_request.html')
 
@@ -57,6 +55,10 @@ def view_investor_profile(request):
 
 def proposal(request):
     return render(request, 'ipdc/Park_admin_dashboard/proposal.html')
+
+def pdfviewer(request):
+    return render(request, 'ipdc/Park_admin_dashboard/pdf_viewer.html')
+
 
 @login_required(login_url='login')
 def investorprofilepage(request):
@@ -91,7 +93,6 @@ def request_land(request):
         landrequested=DomesticRequest.objects.get(investor=request.user.investor)
     except:
         landrequested=DomesticRequest.objects.filter(investor=request.user.investors).first
-
 
     landform=LandForm()
     
