@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 class Investor(models.Model):
 	choices=(
@@ -44,6 +45,12 @@ class DomesticRequest(models.Model):
 		('PLC','PLC'),
 		('joint-venture','joint-venture')
 		)
+	status=(
+		('onlist','onlist'),
+		('pending','pending'),
+		('approved','approved'),
+		('denied','denied'),
+		)
 	investor=models.ForeignKey(Investor,on_delete=models.CASCADE)
 	form_of_investment=models.CharField(max_length=300,choices=formchoice)
 	requested_type=models.CharField(max_length=300,choices=types)
@@ -58,7 +65,11 @@ class DomesticRequest(models.Model):
 	Permanent_job=models.CharField(max_length=300)
 	proposal=models.FileField(null=True,blank=True)
 	bank_statement=models.FileField(null=True,blank=True)
-
+	date=models.DateField(auto_now_add=True)
+	primary_checked=models.BooleanField(default=False)
+	secondary_checked=models.BooleanField(default=False)
+	tertiary_checked=models.BooleanField(default=False)
+	status=models.CharField(max_length=300,choices=status,default='onlist')
 	def __str__(self):
 		return self.form_of_investment
 	
@@ -88,3 +99,12 @@ class Notification(models.Model):
 	link=models.URLField(max_length = 200,null=True,blank=True)
 	def __str__(self):
 		return str(self.note_text[:30] +' ...')
+
+
+class FeedBack(models.Model):
+		feeder=models.ForeignKey(User,on_delete=models.CASCADE)
+		domesticrequest=models.ForeignKey(DomesticRequest,on_delete=models.CASCADE)
+		feedback_text=models.TextField(max_length=1234567)
+		allow_investor_to_see=models.BooleanField(default=True)
+		def __str__(self):
+			return str(self.feedback_text[:13])

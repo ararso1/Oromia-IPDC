@@ -19,4 +19,8 @@ class MessageForm(ModelForm):
 		fields='__all__'
 		exclude=['written_by','privatechat']
 
-
+class FeedbackForm(ModelForm):
+	class Meta:
+		model=FeedBack
+		fields='__all__'
+		

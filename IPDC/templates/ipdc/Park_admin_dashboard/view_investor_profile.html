@@ -119,10 +119,10 @@
                                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Investor Personal Information</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Project Information</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="false">Document</a>
@@ -162,10 +162,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Name</label>
+                                        <label>Investor Name</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Kshiti Ghelani</p>
+                                        <p>{{domesticrequest.investor.title}} {{domesticrequest.investor.first_name}} {{domesticrequest.investor.middle_name}} {{domesticrequest.investor.last_name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Sex</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.investor.gender}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -173,7 +181,7 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>kshitighelani@gmail.com</p>
+                                        <p>{{domesticrequest.investor.email}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -181,41 +189,180 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>123 456 7890</p>
+                                        <p>{{domesticrequest.investor.phonenumber}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Profession</label>
+                                        <label>Educationa Level</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Web Developer and Designer</p>
+                                        <p>{{domesticrequest.investor.education_level}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.investor.phonenumber}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Current Address</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.investor.current_Address}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Tin</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.investor.Tin}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Id Card</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.investor.id_card}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Passport</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.investor.passport}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Experience</label>
+                                        <label>Project Name</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hourly Rate</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>10$/hr</p>
+                                        <p>{{domesticrequest.project_name}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Total Projects</label>
+                                        <label>Form of Investment</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>230</p>
+                                        <p>{{domesticrequest.form_of_investment}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Requested Type</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.requested_type}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Requested Land</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.requested_land}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Sector</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.sector}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Project Description</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea style="text-align: left;" rows="5" cols="38">
+                                            {{domesticrequest.project_description}}
+                                            </textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Capital</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.capital}} ETB</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Owner Equity</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.owner_equity}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Bank loan</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.bank_loan}} ETB</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Temporary Job</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.temporay_job}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Permanent Job</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.Permanent_job}}</p>
+                                    </div>
+                                </div>
+                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Proposal</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p> <a href="{% url 'pdfviewer' domesticrequest.id %}">{{domesticrequest.proposal}}</a> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Bank statement </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.bank_statement}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>applied date</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.date}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Status</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{domesticrequest.status}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -244,10 +391,10 @@
                                 <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Experience</label>
+                                            <label>project Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Expert</p>
+                                            <p>{{domesticrequest.project_name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">

@@ -2,12 +2,77 @@
 {% load static %}
 
 <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    .pdfview{
+        display: flex;
+        width: 100%;
+        height: 85vh;
+        border: solid;
+        margin: 5px;
+    }
+    .ifr{
+        border: solid blue;
+        width: 60%;
+    }
+    .textar{
+        border: solid red;
+        width:40%;
+    }
     iframe{
-        width: 70%;
-        height: 975px;
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+    }
+    textarea{
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+    }
+    .submit{
+        width:100%;
+        text-align: center;
+        font-size:3rem;
+        font-weight: 600;
+        margin-top: 10px;
+
+
+    }
+    .submit input{
+        background: #0ef;
+        border-radius: 4rem;
+        padding: 10px;
+
+
     }
 </style>
+<form method="POST">
+    {%csrf_token%}
+<div class="pdfview">
+    <div class="ifr">
+        <iframe src="{% static domesticrequest.proposal.url  %}" frameborder="0"></iframe>
+    </div>
+    <div class="textar">
+       <textarea name="feedback_text">
+        
+       </textarea>
+    </div>
+</div>
+<div>
+    check
+    <input type="checkbox" name="allow_investor_to_see" id="id_allow_investor_to_see" checked>
+    
+    <input hidden type="number" name="feeder" value="{{request.user.id}}">
+    
+    <input  hidden type="number" name="domesticrequest" value="{{domesticrequest.id}}">
+</div>
+<div class="submit">
+    
+    <input type="submit">
 
-<iframe src="{% static 'Doc1.pdf' %}" frameborder="0"></iframe>
-
+</div>
+</form>
 {% include 'ipdc/Park_admin_dashboard/footer.html' %}

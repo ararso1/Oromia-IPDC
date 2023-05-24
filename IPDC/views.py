@@ -48,16 +48,29 @@ def license_request(request):
     return render(request, 'ipdc/Investor_dashboard/license_request.html')
 
 def all_investor(request):
-    return render(request, 'ipdc/Park_admin_dashboard/all_investor.html')
+    domesticrequests=DomesticRequest.objects.all()
+    context={'domesticrequests':domesticrequests}
+    return render(request, 'ipdc/Park_admin_dashboard/all_investor.html',context)
 
-def view_investor_profile(request):
-    return render(request, 'ipdc/Park_admin_dashboard/view_investor_profile.html')
+def view_investor_profile(request,pk):
+    domesticrequest=DomesticRequest.objects.get(id=pk)
+    context={'domesticrequest':domesticrequest}
+    return render(request, 'ipdc/Park_admin_dashboard/view_investor_profile.html',context)
 
 def proposal(request):
     return render(request, 'ipdc/Park_admin_dashboard/proposal.html')
 
-def pdfviewer(request):
-    return render(request, 'ipdc/Park_admin_dashboard/pdf_viewer.html')
+def pdfviewer(request,pk):
+    domesticrequest=DomesticRequest.objects.get(id=pk)
+    feedform=FeedbackForm()
+    if request.method =='POST':
+        feedform=FeedbackForm(request.POST)
+        if feedform.is_valid():
+            feedform.save()
+            return HttpResponse('saved bro')
+    print(feedform)
+    context={'feedform':feedform,'domesticrequest':domesticrequest}
+    return render(request, 'ipdc/Park_admin_dashboard/pdf_viewer.html',context)
 
 
 @login_required(login_url='login')
