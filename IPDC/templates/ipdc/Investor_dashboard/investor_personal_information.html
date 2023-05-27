@@ -1,0 +1,34 @@
+
+{% include 'ipdc/investor_dashboard/header.html' %}
+{% load static %}
+    
+    <!-- MAIN CONTENT-->
+    
+
+    {% block content %}
+   
+              <!-- MAIN CONTENT-->
+              <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <h5>You are not authorized to go beyond before complete your profile</h5>
+                        <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'investor_profile' %}" style="color: black">Click Here</a></button>  
+                    </div>
+                    </div>
+                </div>
+              <!-- END MAIN CONTENT-->
+            
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+
+{%endblock%}
+<!-- jQuery -->
+
+{% include 'ipdc/investor_dashboard/footer.html' %}

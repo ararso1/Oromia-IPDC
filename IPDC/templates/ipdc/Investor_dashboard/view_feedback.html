@@ -1,0 +1,58 @@
+
+{% include 'ipdc/investor_dashboard/header.html' %}
+{% load static %}
+    
+    <!-- MAIN CONTENT-->
+    
+
+    {% block content %}
+  <style>
+    .feeds{
+        border: solid;
+        margin-top: 20px;
+    }
+  </style>  
+   
+              <!-- MAIN CONTENT-->
+              <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        {% for feedback in feed_backs %}
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">{{feedback.feeder}}
+                                        <small>
+                                            <span class="badge badge-success float-right mt-1"> <a href=""> <h4>chat with him</h4> </a></span>
+                                        
+                                        </small>
+                                    </strong>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{feedback.feedback_text|safe}}
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    </div>
+                </div>
+              <!-- END MAIN CONTENT-->
+            
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+
+{%endblock%}
+<!-- jQuery -->
+
+{% include 'ipdc/investor_dashboard/footer.html' %}

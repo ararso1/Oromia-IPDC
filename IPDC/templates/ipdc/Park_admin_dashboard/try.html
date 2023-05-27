@@ -1,0 +1,8 @@
+<html>
+    <form method="POST">
+        {%csrf_token%}
+        {{ritchform.as_p}}
+        {{ritchform.media}}
+        <input type="submit">
+    </form>
+</html>
