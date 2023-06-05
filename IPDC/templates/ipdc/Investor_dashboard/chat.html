@@ -100,7 +100,7 @@ a:hover {
                             {%else%}
                             <a href="{% url 'chat' privatechat.primary_user.username %}" class="list-group-item list-group-item-action border-0">
                                 {%endif%}
-                            <div class="badge bg-success float-right">10</div>
+                            <div class="badge bg-success float-right" id="{{privatechat.id}}" ></div>
                             <div class="d-flex align-items-start">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                 <div class="flex-grow-1 ml-3">
@@ -163,6 +163,25 @@ a:hover {
                                         console.log("error ocurred bro")
                                     }
                                 });
+                                $.ajax({
+                                            type: 'GET',
+                                            url : "/api/get_person_unseen_historymessage/",
+                                            success: function(response){
+                                                for (var key in response){
+                                                    if(response[key].total_not_seen != 0){
+                                                        document.getElementById(String(response[key].privatechat)).innerHTML=String(response[key].total_not_seen);
+
+                                                    }
+                                                    else{
+                                                        document.getElementById(String(response[key].privatechat)).style.display='none';
+                                                    }
+                                                        
+                                                    
+                                        }
+                                            }
+                                            
+                                        });
+
                             },1000);
                             })
                             </script>
@@ -176,7 +195,7 @@ a:hover {
                             <div class="input-group">
                                     <input type="text" id="msgtext" class="form-control" name="msg" placeholder="Type your message">
                                     <input hidden type="number" class="form-control" id="written_by" name="written_by" value="{{request.user.id}}" placeholder="Type your message">
-                                    <input hidden type="number" class="form-control" id="privatechat" name="privatechat" value="{{privatechat}}" placeholder="Type your message">
+                                    <input hidden type="number" class="form-control" id="privatechat" name="privatechat" value="{{room_id}}" placeholder="Type your message">
 
                                     <button  class="btn btn-primary">Send</button>
                             </div>

@@ -7,12 +7,52 @@ from django.http import HttpResponse
 from django.db.models import Q
 
 #django restframe work
+@api_view(['GET'])
+def get_person_unseen_historymessage(request):
+    messages=Message.objects.filter(Q(privatechat__primary_user=request.user) | Q(privatechat__secondary_user=request.user)).filter()
+    a=[]
+    privatechats=Privatechat.objects.filter(Q(primary_user=request.user) | Q(secondary_user=request.user ))
+    for privatechat in privatechats:
+        messages=Message.objects.filter(privatechat=privatechat).filter(seen=False).filter(~Q(written_by=request.user))
+        a.append({"privatechat": privatechat.id,'total_not_seen':len(messages)})
+    return Response(a)
+
+
+
+@api_view(['GET'])
+def getunseenchat(request):
+    unseen=len(Message.objects.filter(seen=False).filter(Q(privatechat__primary_user=request.user) | Q(privatechat__secondary_user=request.user )).filter(~Q(written_by=request.user)))
+    data=[
+        {
+            'unseen_count':unseen,
+            
+        }
+    ]
+    return Response(data)
+
 
 @api_view(['GET'])
 def getmessages(request):
-    messages=Message.objects.all()
+    messages=Message.objects.all().order_by('-id')
     serializer = MessageSerializer(messages,many=True)
-    return Response(serializer.data)
+    x=serializer.data
+    for j in range(len(x)):
+        x[j]['total_unseen']=99
+
+    return Response(x)
+
+
+
+
+@api_view(['GET'])
+def makeallseen(request):
+    unseen_notifications=Notification.objects.filter(user=request.user).filter(seen=False)
+    
+    for unseen in unseen_notifications:
+        unseen.seen=True
+        unseen.save()
+    return Response()
+
 
 @api_view(['GET'])
 def getunreadmessages(request,pk):
@@ -39,7 +79,7 @@ def getroommessages(request,pk):
 @api_view(['GET'])
 def get_unseen_notifiaction(request,pk):
     user=User.objects.get(id=pk)
-    unseen_notifications=Notification.objects.filter(user=user).filter(seen=False)
+    unseen_notifications=Notification.objects.filter(user=user).order_by('-id')
     serializer = NotificationSerializer(unseen_notifications,many=True)
     return Response(serializer.data)
 
@@ -62,3 +102,10 @@ def addmessage(request):
     else:
         return HttpResponse("notworking")
     return Response(serializer.data)
+
+
+
+
+
+
+

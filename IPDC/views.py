@@ -91,6 +91,7 @@ def pdfviewer(request,pk):
         print("button is working")
         feedform=FeedbackForm(request.POST)
         if feedform.is_valid():
+            Notification.objects.create(user=domesticrequest.investor.user,note_text="you have got feedback on your proposal checkout please ",link='http://127.0.0.1:8000/feedbacklist')
             feedform.save()
             return HttpResponse('saved bro')
     print(feedform)
@@ -107,7 +108,7 @@ def investorprofilepage(request):
         investor=Investor.objects.filter(user=request.user).first
 
     investorform=InvestorForm()
-    unseen_notifications=Notification.objects.filter(user=request.user)
+    unseen_notifications=Notification.objects.filter(user=request.user).order_by('-id')
     not_count=len(unseen_notifications)
     if request.method =="POST":
         print("and again")
@@ -152,15 +153,22 @@ def request_land(request):
 
 @login_required(login_url='login')
 def chat(request,pk):
-    print('username ',pk)
+    print('username pk ',pk)
+    print('on username',request.user.username)
     privatechat=Privatechat.objects.filter(Q(primary_user__username=request.user.username) & Q(secondary_user__username=pk))
+    print("the private is",privatechat)
     if not privatechat :
-            privatechats=Privatechat.objects.filter(Q(primary_user__username=pk) & Q(secondary_user__username=request.user.username))
+            print()
+            privatechat=Privatechat.objects.filter(Q(primary_user__username=pk) & Q(secondary_user__username=request.user.username))
 
     print("privatechat",privatechat)
     privateroom=privatechat.first()
     messages=Message.objects.filter(privatechat=privateroom)
-    
+    unreads=messages.filter(~Q(written_by=request.user)).filter(seen=False)
+    for unread in unreads:
+        unread.seen=True
+        unread.save()
+    room_id=privateroom.id
     if privateroom.primary_user.username == request.user.username:
         friend=privateroom.secondary_user
     else:
@@ -175,8 +183,8 @@ def chat(request,pk):
             messagefor.save()  
     print('The messages',messages)
     privatechats=Privatechat.objects.filter(Q(primary_user=request.user) | Q(secondary_user=request.user))
-  
-    context={'privatechats':privatechats,'friend':friend,'messages':messages,'privatechat':pk,'usernam':pk}
+    
+    context={'privatechats':privatechats,'friend':friend,'messages':messages,'privatechat':pk,'usernam':pk,'room_id':room_id}
     return render(request, 'ipdc/Investor_dashboard/chat.html',context)
 
 @login_required(login_url='login')
@@ -207,8 +215,18 @@ def loginPage(request):
     context = {}
     return render(request, 'ipdc/login.html', context)
 
-
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['sitemanager'])
+def reportcase(request):
+    caseform=CaseForm()
+    dept=Department.objects.get(dept_manager=request.user)
+    if request.method =="POST":
+        caseform=CaseForm(request.POST,request.FILES)
+        if caseform.is_valid():
+            caseform.save()
+            return HttpResponse("saved")
+    context={'caseform':caseform,'dept':dept}
+    return render(request,'ipdc/Investor_dashboard/reportcase.html',context)
 
 
 def logoutpage(request):

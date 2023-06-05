@@ -1,0 +1,83 @@
+
+{% include 'ipdc/investor_dashboard/header.html' %}
+{% load static %}
+    
+    <!-- MAIN CONTENT-->
+    
+
+    {% block content %}
+  <style>
+    .feeds{
+        border: solid;
+        margin-top: 20px;
+    }
+    input,select{
+        border: solid 1px;
+        width: 300px;
+        margin-left :10px;
+        margin-top: 20px;
+        padding: 10px;
+        margin-bottom:10px ;
+    }
+    #sub{
+        margin: 30px;
+        margin-left: 300px;
+        padding: 10px;
+        border-radius: 4px;
+
+    }
+    label{
+        display: none;
+    }
+  </style>  
+   
+              <!-- MAIN CONTENT-->
+              <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">
+                                        <small>
+                                            <span class="badge badge-success float-right mt-1"> <a href=""> <h4>chat with him</h4> </a></span>
+                                        
+                                        </small>
+                                    </strong>
+                                </div>
+                                <div class="card-body">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        enter title
+                                    {{caseform.media}}
+                                    
+                                    {{caseform}}
+                                
+                                    <input id="sub" type="submit">
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+              <!-- END MAIN CONTENT-->
+            
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script>
+    document.getElementById('id_dept').innerHTML='<option value="{{dept.id}}" selected="">{{dept.department_name}}</option>';
+    document.getElementById('id_dept').style.display='none';
+</script>
+
+
+{%endblock%}
+<!-- jQuery -->
+
+{% include 'ipdc/investor_dashboard/footer.html' %}

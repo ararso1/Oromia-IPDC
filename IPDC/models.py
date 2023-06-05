@@ -112,5 +112,25 @@ class FeedBack(models.Model):
 class RichText(models.Model):
 	mytext=RichTextField(null=True,blank=True)
 
-	
+class Parksite(models.Model):
+    name=models.CharField(max_length=300)
+    site_manager=models.OneToOneField(User,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
+class Department(models.Model):
+    parksite=models.ForeignKey(Parksite,on_delete=models.CASCADE)
+    department_name=models.CharField(max_length=300)
+    dept_manager=models.OneToOneField(User,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.department_name
+
+class Case(models.Model):
+    dept=models.ForeignKey(Department,on_delete=models.CASCADE)
+    case_title = models.CharField(max_length=300)
+    case_txt=RichTextField(null=True,blank=True)
+    files=models.FileField(null=True,blank=True)
+
+    def __str__(self):
+        return self.case_title
 

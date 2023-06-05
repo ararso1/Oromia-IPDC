@@ -24,6 +24,14 @@ class FeedbackForm(ModelForm):
 		model=FeedBack
 		fields='__all__'
 		
+class CaseForm(ModelForm):
+	class Meta:
+		model=Case
+		fields='__all__'
+		
+
+
+
 class RichTextForm(ModelForm):
 	class Meta:
 		model=RichText

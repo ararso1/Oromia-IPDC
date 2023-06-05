@@ -26,7 +26,8 @@ urlpatterns = [
     path('proposal', views.proposal, name="proposal"),
     path('pdfviewer/<str:pk>/', views.pdfviewer, name="pdfviewer"),
     path('awesometext',views.awesome,name='awesome'),
-    path('feedbacklist',views.feedbacklist , name="feedbacklist")
+    path('feedbacklist',views.feedbacklist , name="feedbacklist"),
+    path('report/',views.reportcase,name='reportcase'),
     
 ]
 
