@@ -3,6 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from captcha.fields import ReCaptchaField
+
 class InvestorForm(ModelForm):
 	class Meta:
 		model = Investor
@@ -30,9 +33,14 @@ class CaseForm(ModelForm):
 		fields='__all__'
 		
 
-
+class Recaptcha(forms.Form):
+	captcha=ReCaptchaField()
 
 class RichTextForm(ModelForm):
 	class Meta:
 		model=RichText
 		fields='__all__'
+class CreateUserForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ['username','password1', 'password2']

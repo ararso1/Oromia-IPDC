@@ -9,6 +9,8 @@ from . models import *
 from django.http import HttpResponse
 from .decorators import *
 from django.db.models import Q
+from django.contrib.auth.models import Group
+
 
 @login_required(login_url='login')
 def unallowedpage(request):
@@ -18,6 +20,7 @@ def unallowedpage(request):
 @role_based
 def index(request):
     return render(request, 'ipdc/index.html')
+
 def awesome(request):
     ritchform=RichTextForm()
     if request.method=='POST':
@@ -112,11 +115,12 @@ def investorprofilepage(request):
     not_count=len(unseen_notifications)
     if request.method =="POST":
         print("and again")
-        if investor:
-            print("pre")
+        try:
+            x= investor[0]
+            print("pre",investor)
             investorform=InvestorForm(request.POST,request.FILES,instance=investor)
             print("working ...")
-        else:
+        except:
             investorform=InvestorForm(request.POST,request.FILES)
         if investorform.is_valid():
             investor=investorform.save(commit=False)
@@ -131,12 +135,16 @@ def investorprofilepage(request):
 @allowed_users(allowed_roles=['investor'])
 def request_land(request):
     try:
+        x=request.user.investor
+    except:
+        return redirect('investor_personal_information')
+    try:
         landrequested=DomesticRequest.objects.get(investor=request.user.investor)
     except:
-        landrequested=DomesticRequest.objects.filter(investor=request.user.investors).first
+        landrequested=DomesticRequest.objects.filter(investor=request.user.investor).first
 
     landform=LandForm()
-    
+    print("still working")
     if request.method =='POST':
         if landrequested:
             landform=LandForm(request.POST , request.FILES,instance=landrequested)
@@ -153,7 +161,6 @@ def request_land(request):
 
 @login_required(login_url='login')
 def chat(request,pk):
-    print('username pk ',pk)
     print('on username',request.user.username)
     privatechat=Privatechat.objects.filter(Q(primary_user__username=request.user.username) & Q(secondary_user__username=pk))
     print("the private is",privatechat)
@@ -189,6 +196,14 @@ def chat(request,pk):
 
 @login_required(login_url='login')
 def chatpage(request):
+    try:
+        print("The group is", request.user.groups.all()[0].name)
+        if request.user.groups.all()[0].name == 'investor':
+            print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+            e=request.user.investor.DomesticRequest
+            print("watttttt",e)
+    except:
+        return redirect('investor_personal_information')
     privatechats=Privatechat.objects.filter(Q(primary_user=request.user) | Q(secondary_user=request.user))
     
     context={'privatechats':privatechats}
@@ -198,21 +213,24 @@ def chatpage(request):
 
 @unauthenticated_user
 def loginPage(request):
+    captcha=Recaptcha()
     if request.method == 'POST':
         print("working")
-        email = request.POST.get('email')
-        password =request.POST.get('password')
-        try:
-            user = authenticate(request, username=email, password=password)
-        except:
-            return HttpResponse('INvalid uer or pass')
-        if user is not None:
-            login(request, user)
-            return redirect("home")
-        else:
-            messages.info(request, 'Username OR password is incorrect')
+        captcha=Recaptcha(request.POST)
+        if captcha.is_valid():
+            email = request.POST.get('email')
+            password =request.POST.get('password')
+            try:
+                 user = authenticate(request, username=email, password=password)
+            except:
+                 return HttpResponse('INvalid uer or pass')
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+            else:
+                messages.info(request, 'Username OR password is incorrect')
 
-    context = {}
+    context = {'captcha':captcha}
     return render(request, 'ipdc/login.html', context)
 
 @login_required(login_url='login')
@@ -236,7 +254,40 @@ def logoutpage(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['investor'])
 def feedbacklist(request):
+    try:
+        print("The group is", request.user.groups.all()[0].name)
+        if request.user.groups.all()[0].name == 'investor':
+            print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+            e=request.user.investor.DomesticRequest
+            print("watttttt",e)
+    except:
+        return redirect('investor_personal_information')
     feed_backs=FeedBack.objects.filter(domesticrequest__investor=request.user.investor).filter(allow_investor_to_see=True)
     print("my investor",request.user.investor)
     context={'feed_backs':feed_backs}
     return render(request,'ipdc/Investor_dashboard/view_feedback.html',context)
+
+@unauthenticated_user
+def register(request):
+	form = CreateUserForm()
+	captcha=Recaptcha()
+	if request.method == 'POST':
+		form = CreateUserForm(request.POST)
+		captcha=Recaptcha(request.POST)
+		if form.is_valid() and captcha.is_valid():
+			user = form.save()
+			username = form.cleaned_data.get('username')
+			
+			group = Group.objects.get(name='investor')
+			user.groups.add(group)
+			#Added username after video because of error returning customer name if not added
+			
+			messages.success(request, 'Account was created for ' + username)
+
+			return redirect('login')
+        
+		
+
+	context = {'form':form,'captcha':captcha}
+	return render(request, 'ipdc/Investor_dashboard/register.html', context)
+	

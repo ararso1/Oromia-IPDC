@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'IPDC',
+    'captcha',
     'rest_framework',
     'api',
     "corsheaders",
@@ -143,3 +144,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'abdulselam4246@gmail.com'
+EMAIL_HOST_PASSWORD = 'gicoleaxsjnxkwlg'
+
+
+RECAPTCHA_PUBLIC_KEY = '6LfcEHMmAAAAANJMkP_7F6LO1J6l30gt2xhcwHar'
+RECAPTCHA_PRIVATE_KEY = '6LfcEHMmAAAAALSuXiGH0GN0ZlBt92xWRwyieOLT'
