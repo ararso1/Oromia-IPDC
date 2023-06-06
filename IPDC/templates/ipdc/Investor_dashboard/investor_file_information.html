@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'ipdc/investor_dashboard/header.html' %}
+{% load static %}
+
+    {% block content %}
+
+    <div class="main-content">
+      <div class="section__content section__content--p30">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="card">
+                          <div class="card-header">Credit Card</div>
+                          <div class="card-body">
+                              <div class="card-title">
+                                  <h3 class="text-center title-2">Pay Invoice</h3>
+                              </div>
+                              <hr>
+                              <form method="POST"  enctype="multipart/form-data">
+                                {{landform.errors}}
+                                {% csrf_token %}
+                                
+                              <div class="form-group">
+                                      <label>Form of Investement</label>
+                                      <select value="{{land_requested.form_of_investment}}" class="form-control" name='form_of_investment' required>
+                                        <option>soleprorietor</option>
+                                        <option>PLC</option>
+                                        <option>joint-venture</option>
+                                      </select>
+                                    </div>
+                              <div class="form-group">
+                                      <label>Request Type</label>
+                                      <select value="{{land_requested.requested_type}}" class="form-control" name='requested_type' required>
+                                        <option>License</option>
+                                        <option>Land Request</option>
+                                        <option>Expansion</option>
+                                      </select>
+                                    </div>
+                                <div class="form-group">
+                                <label for="exampleInputPassword1">Requested Land (In Hec.Or M2)</label>
+                                  <input value="{{land_requested.requested_land}}" type="number" name="requested_land" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="total" required>
+                                </div>
+                              <div class="form-group">
+                                      <label>sector</label>
+                                      <select value="{{land_requested.sector}}" class="form-control" name='sector' required>
+                                        <option>Manufacturing</option>
+                                        <option>Agriculture</option>
+                                        <option>Service</option>
+                                      </select>
+                                    </div>
+                                <div class="form-group">
+                                <label for="exampleInputPassword1"> Project Name</label>
+                                  <input value="{{land_requested.project_name}}" type="text" name="project_name" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="project name" required>
+                                </div>
+                                <div class="form-group">
+                                  <label>Project description</label>
+                                   <textarea  name='project_description' class="form-control" rows="6" placeholder="project description">{{land_requested.project_description}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                <label for="exampleInputPassword1">capital</label>
+                                  <input value="{{land_requested.capital}}" type="number" name="capital" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="exampleInputPassword1">owner equity</label>
+                                  <input value="{{land_requested.owner_equity}}" type="number" name="owner_equity" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                                </div>
+                              
+                              
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1">bank loan</label>
+                                  <input value="{{land_requested.bank_loan}}" type="number" name="bank_loan" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                                </div>  
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1">Temporary Job Create </label>
+                                  <input value="{{land_requested.temporay_job}}" type="text" name="temporay_job" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1">Permanent Job Create </label>
+                                  <input value="{{land_requested.Permanent_job}}" type="text" name="Permanent_job" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">proposal</label>
+                                <input value="{{land_requested.proposal}}" type="file" name="proposal" class="form-control" id="exampleInputFile" placeholder="passport-file" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Bank Assesment</label>
+                                <input value="{{land_requested.bank_statement}}" type="file" name="bank_statement" class="form-control" id="exampleInputFile" placeholder="id_card" required>
+                              </div>
+                              
+                          
+                                <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                              </div>
+                              <!-- /.card-body -->
+                             
+                              <!-- /.card-footer -->
+                            </form>
+                          
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+    
+
+{% endblock %}
+
+{% include 'ipdc/investor_dashboard/footer.html' %}
+

@@ -1,0 +1,136 @@
+{% include 'ipdc/Park_admin_dashboard/header.html' %}
+{% load static %}
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    .card,.card-body{
+        height: 800px;
+    }
+
+    .vie{
+        display: flex;
+    }
+   .formsother{
+    padding-left: 40%;
+   }
+   
+   
+    iframe{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .check{
+        height: 3rem;
+        border: solid blue;
+        width:3rem;
+    }
+
+    .django-ckeditor-widget{
+        height: 100%;
+    }
+    .formm{
+        overflow: scroll;
+        height: 100%;
+    }
+    .cke_bottom .cke_reset_all{
+        display: none;
+
+    }
+    textarea{
+        width: 100%;
+        height: 8000px;
+        padding: 15px;
+    }
+    .submit{
+        width:100%;
+        text-align: center;
+        font-size:3rem;
+        font-weight: 600;
+        margin-top: 10px;
+
+
+    }
+    .submit input{
+        background: #0ef;
+        border-radius: 4rem;
+        padding: 10px;
+
+
+    }
+
+    #id_feeder,#id_domesticrequest,label,#id_allow_investor_to_see{
+        display: none;
+    }
+</style>
+<form method="POST">
+    {%csrf_token%}
+<div class="vie">
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">{{domesticrequest}} : {{domesticrequest.investor}}
+                <small>
+                    <span class="badge badge-success float-right mt-1"> <a href=""> <h4>chat with him</h4> </a></span>
+                
+                </small>
+            </strong>
+        </div>
+        <div style="border: solid;" class= "card-body">
+            
+                <iframe  src="{% static domesticrequest.proposal.url  %}" frameborder="0"></iframe>
+
+            
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">goood
+                <small>
+                    <span class="badge badge-success float-right mt-1"> <a href=""> <h4>chat with him</h4> </a></span>
+                
+                </small>
+            </strong>
+        </div>
+        <div style="border: solid;" class="card-body">
+            <div class ='formm'>
+                {{feedform.media}}
+                {{feedform}}
+               </div> 
+
+        </div>
+    </div>
+</div>
+</div>
+<div class="formsother">
+    <h2>Allow Investor to see 
+    <input class="check" type="checkbox" name="allow_investor_to_see"  checked></h2>
+    <input hidden type="number" name="feeder" value="{{request.user.id}}">
+
+    <input  hidden type="number" name="domesticrequest" value="{{domesticrequest.id}}">
+</div>
+<div class="submit">
+    
+    <input type="submit">
+
+</div>
+</form>
+
+<script>
+    document.getElementById('id_feeder').value="{{request.user.id}}"
+    document.getElementById('id_domesticrequest').value="{{domesticrequest.id}}"
+    document.getElementById('id_allow_investor_to_see').name="ghyt"
+
+
+</script>
+{% include 'ipdc/Park_admin_dashboard/footer.html' %}

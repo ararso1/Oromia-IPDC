@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'ipdc/investor_dashboard/investor_main_form.html' %}
+{% load static %}
+
+    {% block content %}
+
+
+<form method="POST">
+                  {{landform.errors}}
+                  {% csrf_token %}
+                  
+                <div class="form-group">
+                        <label>Form of Investement</label>
+                        <select class="form-control" name='form_of_investment' required>
+                          <option>soleprorietor</option>
+                          <option>PLC</option>
+                          <option>joint-venture</option>
+                        </select>
+                      </div>
+                <div class="form-group">
+                        <label>Request Type</label>
+                        <select class="form-control" name='requested_type' required>
+                          <option>License</option>
+                          <option>Land Request</option>
+                          <option>Expansion</option>
+                        </select>
+                      </div>
+                  <div class="form-group">
+                  <label for="exampleInputPassword1">Requested Land (In Hec.Or M2)</label>
+                    <input type="number" name="requested_land" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="total" required>
+                  </div>
+                <div class="form-group">
+                        <label>sector</label>
+                        <select class="form-control" name='sector' required>
+                          <option>Manufacturing</option>
+                          <option>Agriculture</option>
+                          <option>Service</option>
+                        </select>
+                      </div>
+                  <div class="form-group">
+                  <label for="exampleInputPassword1"> Project Name</label>
+                    <input type="number" name="project_name" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="project name" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Project description</label>
+                     <textarea  name='project_description' class="form-control" rows="6" placeholder="project description"></textarea>
+                  </div>
+                  <div class="form-group">
+                  <label for="exampleInputPassword1">capital</label>
+                    <input type="number" name="capital" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                  </div>
+                  <div class="form-group">
+                  <label for="exampleInputPassword1">owner equity</label>
+                    <input type="number" name="owner_equity" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                  </div>
+                
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword1">bank loan</label>
+                    <input type="number" name="bank_loan" step="0.01" min="0" class="form-control" id="exampleInputPassword1" placeholder="$" required>
+                  </div>  
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Temporary Job Create </label>
+                    <input type="text" name="temporay_job" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Permanent Job Create </label>
+                    <input type="text" name="Permanent_job" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                </div>
+                
+           
+                  <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <!-- /.card-body -->
+               
+                <!-- /.card-footer -->
+              </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'ipdc/investor_dashboard/investor_main_form.html' %}
+{% load static %}
+
+    {% block content %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'profilepage' %}">Profile</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="{% url 'landpage' %}">request land</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'filesubmit' %}">filesubmit</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Quick Example</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              {{investorform.errors}}
+              <form method="POST">
+                {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <select class="form-control" name='title' required>
+                          <option>Mr.</option>
+                          <option>Mrs.</option>
+                          <option>Ms.</option>
+                          <option>Mx.</option>
+                          <option>Miss</option>
+                          <option>Dr.</option>
+                          <option>Prof.</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">First Name </label>
+                    <input type="text" required name="first_name" class="form-control" id="exampleInputPassword1" placeholder="middle name">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Middle name</label>
+                    <input type="text" class="form-control" name="middle_name" id="exampleInputPassword1" placeholder="middle name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Last name</label>
+                    <input type="text" name="last_name" class="form-control" id="exampleInputPassword1" placeholder="last name" required>
+                  </div>
+                  <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control" name='gender' required>
+                          <option>male</option>
+                          <option>female</option>
+                          
+                        </select>
+                      </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">email</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputPassword1" placeholder="email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Phone number</label>
+                    <input type="phone-number" name="phonenumber" class="form-control" id="exampleInputPassword1" placeholder="Phone number" required>
+                  </div>
+                 <div class="form-group">
+                    <label for="exampleInputPassword1">Education level</label>
+                    <input type="text" name="education_level" class="form-control" id="exampleInputPassword1" placeholder="Education level" required>
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">current Address</label>
+                    <input type="text" name="current_Address" class="form-control" id="exampleInputPassword1" placeholder="current Address" required>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">passport</label>
+                    <input type="file" name="passport" class="custom-file-input" id="exampleInputFile" placeholder="passport-file" required>
+                  </div>
+
+
+                   <div class="form-group">
+                    <label for="exampleInputPassword1"> Tin</label>
+                    <input type="text" name="Tin" class="form-control" id="exampleInputPassword1" placeholder="Tin" required>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+            <!-- general form elements -->
+            
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+
+{%endblock%}
+<!-- jQuery -->
